@@ -50,6 +50,6 @@ public class DataInitializer implements CommandLineRunner {
         Ticket ticket2 = new Ticket(null, "B2", TicketStatus.BOOKED, new BigDecimal("650.00"), LocalDateTime.now(), SeatType.BUSINESS, trip2, user);
         ticketRepository.saveAll(List.of(ticket1, ticket2));
 
-        System.out.println("✅ Initial test data loaded");
+        System.out.println("Initial test data loaded");
     }
 }

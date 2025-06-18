@@ -64,6 +64,9 @@ public class SecurityConfig {
 }
 
 
+/**
+ * No security for tests
+ */
 //    @Bean
 //    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 //        http
