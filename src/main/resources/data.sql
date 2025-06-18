@@ -1,0 +1,17 @@
+-- -- USERS
+-- INSERT INTO users (id, username, email, password)
+-- VALUES
+--     (1, 'john_doe', 'john@example.com', 'p@ssword123'),
+--     (2, 'jane_smith', 'jane@example.com', 'p@ssword1234');
+--
+-- -- TRIPS
+-- INSERT INTO trip (id, departure_place, arrival_place, departure_time, arrival_time, transport_type)
+-- VALUES
+--     (1, 'Kyiv', 'Lviv', '2025-06-01 08:00:00', '2025-06-01 12:00:00', "BUS"),
+--     (2, 'Odesa', 'Kharkiv', '2025-06-02 14:00:00', '2025-06-02 20:00:00', "BUS");
+--
+-- -- TICKETS
+-- INSERT INTO ticket (id, seat_number, status, price, purchase_time, seat_type, trip_id, user_id)
+-- VALUES
+--     (1, 'A1', 'AVAILABLE', 500, null, "ECONOMY", 1, null),
+--     (2, 'B2', 'PURCHASED', 650, now(),"BUSINESS", 2, 2);
