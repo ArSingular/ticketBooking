@@ -1,5 +1,6 @@
 package dev.korol.ticket_booking.security;
 
+import dev.korol.ticket_booking.entity.User;
 import dev.korol.ticket_booking.security.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -41,7 +42,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+//            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            User userDetails = (User) userDetailsService.loadUserByUsername(username);
             if (jwtService.validateToken(token, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,

@@ -28,20 +28,22 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
+    @PreAuthorize("hasRole('ADMIN') or #userId == authentication.principal.id")
     public ResponseEntity<UserDTO> getUser(@PathVariable Long userId) {
         return ResponseEntity.ok(userService.getUserById(userId));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
 
 
-    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{userId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteUser(@PathVariable Long userId){
         userService.deleteUser(userId);
         return ResponseEntity.noContent().build();

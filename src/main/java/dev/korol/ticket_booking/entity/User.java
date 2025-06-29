@@ -22,10 +22,6 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Column(name = "username", nullable = false,  unique = true, length = 50)
-//    private String username;
-
-
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
@@ -74,4 +70,5 @@ public class User implements UserDetails {
     public String getUsername() {
         return this.email;
     }
+
 }

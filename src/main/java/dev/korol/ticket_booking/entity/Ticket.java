@@ -24,14 +24,14 @@ public class Ticket {
     @Column(name = "seat_number", nullable = false, length = 10)
     private String seatNumber;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private TicketStatus status;
 
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
-    @Column(name = "purchase_time", nullable = true)
+    @Column(name = "purchase_time")
     private LocalDateTime purchaseTime;
 
     @Enumerated(EnumType.STRING)

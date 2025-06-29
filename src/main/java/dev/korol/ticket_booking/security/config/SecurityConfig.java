@@ -32,18 +32,46 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        // public endpoints
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers(GET, "api/trips/**").permitAll()
-                        .requestMatchers(GET, "api/tickets/**").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers(GET, "/api/trips/**").permitAll()
+                        .requestMatchers(GET, "/api/tickets/**").permitAll()
+
+                        .requestMatchers(POST, "/api/tickets/buy").hasRole("USER")
+                        .requestMatchers(POST, "/api/tickets/**").hasRole("ADMIN")
+                        .requestMatchers(PUT, "/api/tickets/**").hasRole("ADMIN")
+                        .requestMatchers(DELETE, "/api/tickets/**").hasRole("ADMIN")
+                        .requestMatchers(POST, "/api/trips/**").hasRole("ADMIN")
+                        .requestMatchers(PUT, "/api/trips/**").hasRole("ADMIN")
+                        .requestMatchers(DELETE, "/api/trips/**").hasRole("ADMIN")
+                        .requestMatchers(GET, "/api/users/**").authenticated()
+                        .requestMatchers(PUT, "/api/users/**").authenticated()
+
+//                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+
+                        .anyRequest().denyAll()
                 )
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
+
+//        return http
+//                .csrf(AbstractHttpConfigurer::disable)
+//                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers("/api/auth/**").permitAll()
+//                        .requestMatchers(GET, "api/trips/**").permitAll()
+//                        .requestMatchers(GET, "api/tickets/**").permitAll()
+//                        .anyRequest().authenticated()
+//                )
+//                .authenticationProvider(authenticationProvider())
+//                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+//                .build();
     }
 
     @Bean
