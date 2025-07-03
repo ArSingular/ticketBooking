@@ -6,6 +6,7 @@ import dev.korol.ticket_booking.service.TripService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class TripController {
     private final TripService tripService;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<TripDTO> createTrip(@RequestBody TripCreateDTO tripCreateDTO) {
         TripDTO tripDTO = tripService.createTrip(tripCreateDTO);
 
@@ -35,6 +37,7 @@ public class TripController {
     }
 
     @DeleteMapping("/{tripId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteTrip(@PathVariable Long tripId){
         tripService.deleteTrip(tripId);
         return ResponseEntity.noContent().build();

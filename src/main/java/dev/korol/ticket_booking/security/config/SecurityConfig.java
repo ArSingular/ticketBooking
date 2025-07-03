@@ -42,7 +42,7 @@ public class SecurityConfig {
                         .requestMatchers(GET, "/api/trips/**").permitAll()
                         .requestMatchers(GET, "/api/tickets/**").permitAll()
 
-                        .requestMatchers(POST, "/api/tickets/buy").hasRole("USER")
+                        .requestMatchers(POST, "/api/tickets/purchase/**").hasRole("USER")
                         .requestMatchers(POST, "/api/tickets/**").hasRole("ADMIN")
                         .requestMatchers(PUT, "/api/tickets/**").hasRole("ADMIN")
                         .requestMatchers(DELETE, "/api/tickets/**").hasRole("ADMIN")
